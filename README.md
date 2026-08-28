@@ -89,8 +89,9 @@ cloudflared tunnel --url http://localhost:3300
 
 ---
 
-## 📚 Tài Liệu Hướng Dẫn Chi Tiết (Documentation)
+## 📚 Trung Tâm Kiến Thức & Tài Liệu (Wiki & Docs)
 
+- 🌸 **[Trung Tâm Wiki Chính Thức (Wiki Center)](wiki/Home.md)**: Toàn bộ cẩm nang học tập, kiến trúc, deploy và xử lý sự cố.
 - 🏛️ **[Kiến Trúc Hệ Thống (Architecture)](docs/ARCHITECTURE.md)**: Thiết kế luồng dữ liệu, PWA, Electron và Capacitor.
 - 💻 **[Cẩm Nang Lập Trình Viên (Developer Guide)](docs/DEVELOPER_GUIDE.md)**: Cấu trúc schema dữ liệu, cách thêm bài học mới và danh sách lệnh build.
 - 📖 **[Hướng Dẫn Sử Dụng Dành Cho Học Viên (User Guide)](docs/USER_GUIDE.vi.md)**: Cách học 4 bước, cài app lên điện thoại và bí quyết shadowing.
