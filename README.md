@@ -89,6 +89,16 @@ cloudflared tunnel --url http://localhost:3300
 
 ---
 
+## 📚 Tài Liệu Hướng Dẫn Chi Tiết (Documentation)
+
+- 🏛️ **[Kiến Trúc Hệ Thống (Architecture)](docs/ARCHITECTURE.md)**: Thiết kế luồng dữ liệu, PWA, Electron và Capacitor.
+- 💻 **[Cẩm Nang Lập Trình Viên (Developer Guide)](docs/DEVELOPER_GUIDE.md)**: Cấu trúc schema dữ liệu, cách thêm bài học mới và danh sách lệnh build.
+- 📖 **[Hướng Dẫn Sử Dụng Dành Cho Học Viên (User Guide)](docs/USER_GUIDE.vi.md)**: Cách học 4 bước, cài app lên điện thoại và bí quyết shadowing.
+- ☁️ **[Hướng Dẫn Cloudflare Tunnel (Deployment)](HUONG_DAN_CLOUDFLARED.md)**: Triển khai web ra Internet miễn phí có HTTPS.
+- 📱 **[Hướng Dẫn Đóng Gói App Đa Nền Tảng](HUONG_DAN_RELEASE_APP.md)**: Build file `.exe`, `.dmg`, `.AppImage`, `.apk`.
+
+---
+
 ## 🤝 Đóng Góp (Contributing)
 
 Mọi đóng góp nhằm hoàn thiện nội dung giáo án, bổ sung thẻ Flashcard hoặc cải tiến giao diện đều được hoan nghênh! Vui lòng xem hướng dẫn chi tiết tại [CONTRIBUTING.md](file:///c:/Users/meth/Desktop/hoc-tieng/CONTRIBUTING.md).
