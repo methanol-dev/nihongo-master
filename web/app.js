@@ -749,16 +749,18 @@ function setupBackupModal() {
     reader.onload = (event) => {
       try {
         const data = JSON.parse(event.target.result);
-        if (data.attendanceDates) {
-          attendanceDates = data.attendanceDates;
+        if (Array.isArray(data.attendanceDates)) {
+          attendanceDates = data.attendanceDates.filter(d => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d));
           localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify(attendanceDates));
         }
-        if (data.completedLessons) {
-          completedLessons = new Set(data.completedLessons);
+        if (Array.isArray(data.completedLessons)) {
+          const validLessons = data.completedLessons.filter(id => typeof id === 'string' && id.length < 100);
+          completedLessons = new Set(validLessons);
           localStorage.setItem(STORAGE_KEYS.COMPLETED_LESSONS, JSON.stringify([...completedLessons]));
         }
-        if (data.masteredCards) {
-          masteredCards = new Set(data.masteredCards);
+        if (Array.isArray(data.masteredCards)) {
+          const validCards = data.masteredCards.filter(c => typeof c === 'string' && c.length < 100);
+          masteredCards = new Set(validCards);
           localStorage.setItem(STORAGE_KEYS.MASTERED_CARDS, JSON.stringify([...masteredCards]));
         }
         
