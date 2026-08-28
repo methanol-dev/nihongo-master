@@ -90,6 +90,8 @@ function calculateStreak() {
   return streak;
 }
 
+let currentSpeechRate = 0.85;
+
 // Text-to-Speech (Japanese)
 function speakJapanese(text) {
   if (!('speechSynthesis' in window)) return;
@@ -98,7 +100,7 @@ function speakJapanese(text) {
   const cleanText = text.replace(/[*_#`()\[\]]/g, '').trim();
   const utterance = new SpeechSynthesisUtterance(cleanText);
   utterance.lang = 'ja-JP';
-  utterance.rate = 0.9;
+  utterance.rate = currentSpeechRate;
   
   window.speechSynthesis.speak(utterance);
 }
@@ -682,6 +684,42 @@ function setupFlashcards() {
       currentFlashcardIndex = 0;
       renderFlashcard();
     });
+  });
+
+  // Audio Speed Selector Buttons
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSpeechRate = parseFloat(btn.dataset.speed) || 0.85;
+    });
+  });
+
+  // Global Keyboard Shortcuts for Flashcards
+  window.addEventListener('keydown', (e) => {
+    const flashcardsView = document.getElementById('view-flashcards');
+    if (!flashcardsView || !flashcardsView.classList.contains('active')) return;
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+    if (e.code === 'Space') {
+      e.preventDefault();
+      card.click();
+    } else if (e.code === 'ArrowLeft') {
+      e.preventDefault();
+      prevBtn.click();
+    } else if (e.code === 'ArrowRight') {
+      e.preventDefault();
+      nextBtn.click();
+    } else if (e.key.toLowerCase() === 's' || e.key.toLowerCase() === 'a') {
+      e.preventDefault();
+      soundBtn.click();
+    } else if (e.key === '1') {
+      e.preventDefault();
+      unmasteredBtn.click();
+    } else if (e.key === '2') {
+      e.preventDefault();
+      masteredBtn.click();
+    }
   });
 }
 

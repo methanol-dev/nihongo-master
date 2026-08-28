@@ -4,6 +4,24 @@ Tất cả các thay đổi đáng chú ý của dự án **Nihongo Master** đ�
 
 ---
 
+## [1.1.0] - 2026-08-28
+
+### ⚡ Added & Enhanced (Tính Năng Mới)
+- **Bộ Điều Chỉnh Tốc Độ Phát Âm (Audio Speed Controller)**: Cho phép học viên tùy chỉnh tốc độ đọc tiếng Nhật `0.85x` (chậm chuẩn cho người mới), `1.0x` (bình thường), `1.2x` (phản xạ nhanh) ngay trên Header.
+- **Bộ Phím Tắt Bàn Phím Cho Flashcard (Keyboard Shortcuts)**:
+  - `Space`: Lật thẻ xem nghĩa / ví dụ.
+  - `←` / `→`: Chuyển sang thẻ trước / thẻ kế tiếp.
+  - `S` hoặc `A`: Phát âm tiếng Nhật.
+  - `1`: Đánh dấu Chưa nhớ / `2`: Đánh dấu Đã thuộc.
+- **Hệ Sinh Thái Đóng Gói Đa Nền Tảng (Cross-Platform Native Apps)**:
+  - Cấu hình Electron Desktop App (`electron/main.js`, `electron/preload.js`).
+  - Cấu hình Mobile App Android & iOS qua Capacitor (`capacitor.config.json`, `build-mobile.bat`).
+  - GitHub Actions CI/CD tự động biên dịch và tạo bản cài đặt `.exe`, `.dmg`, `.AppImage`, `.deb` trên GitHub Releases.
+- **Bộ Tài Liệu Kỹ Thuật Đầy Đủ**: Bổ sung `docs/ARCHITECTURE.md`, `docs/DEVELOPER_GUIDE.md`, `docs/USER_GUIDE.vi.md`.
+- **Gia Cố Bảo Mật & SEO**: Tích hợp Schema.org JSON-LD, Robots.txt, Sitemap.xml, Path Traversal Armor và CSP Headers.
+
+---
+
 ## [1.0.0] - 2026-08-28
 
 ### ✨ Added (Đã thêm)

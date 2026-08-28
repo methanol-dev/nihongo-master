@@ -1,6 +1,6 @@
 {
   "name": "nihongo-master",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lộ trình và giáo trình tự học tiếng Nhật từ 0 đến N3 kèm Web App điểm danh và flashcard",
   "main": "electron/main.js",
   "scripts": {
