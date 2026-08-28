@@ -1,0 +1,17 @@
+{
+  "name": "Nihongo Master - Học Tiếng Nhật Từ 0 Đến N3",
+  "short_name": "NihongoMaster",
+  "description": "Lộ trình và giáo trình tự học tiếng Nhật từ sơ cấp đến trung cấp JLPT N3",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#e11d48",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

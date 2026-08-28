@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 Nihongo Master - Học Tiếng Nhật 0 Đến N3</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Lộ trình và giáo trình tự học tiếng Nhật từ sơ cấp đến trung cấp JLPT N3, tích hợp điểm danh, thẻ flashcard phản xạ và phát âm chuẩn bản ngữ.">
+  <meta name="keywords" content="học tiếng nhật, tự học n5, tự học n4, tự học n3, jlpt n3, minna no nihongo, ngữ pháp shinkanzen, từ vựng mimikara, flashcard tiếng nhật">
+  <meta name="author" content="meth">
+  <meta name="theme-color" content="#e11d48">
+  
+  <!-- Open Graph / Facebook / Zalo -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="🌸 Nihongo Master - Học Tiếng Nhật 0 Đến N3">
+  <meta property="og:description" content="Lộ trình toàn diện 76 bài học từ nhập môn, N5, N4 đến N3 kèm công cụ điểm danh và luyện flashcard phản xạ hàng ngày.">
+  <meta property="og:image" content="favicon.svg">
+
+  <!-- PWA & Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- App Container -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🌸</div>
+        <div class="brand-text">
+          <h2>Nihongo Master</h2>
+          <span>Lộ trình Zero → N3</span>
+        </div>
+      </div>
+
+      <!-- Quick User Status -->
+      <div class="user-status-card">
+        <div class="streak-badge">
+          <span class="fire-icon">🔥</span>
+          <div>
+            <div class="streak-count" id="sidebar-streak">0 ngày</div>
+            <div class="streak-label">Chuỗi học tập</div>
+          </div>
+        </div>
+        <button class="btn-checkin" id="btn-quick-checkin">
+          <span id="checkin-btn-icon">✨</span>
+          <span id="checkin-btn-text">Điểm danh hôm nay</span>
+        </button>
+      </div>
+
+      <!-- Nav Menu -->
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="dashboard">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Bảng Điều Khiển</span>
+        </button>
+        <button class="nav-item" data-tab="nhap_mon">
+          <span class="nav-icon">🔰</span>
+          <span class="nav-label">Nhập Môn & Chữ Cái</span>
+          <span class="nav-count" id="count-nhap_mon">0/4</span>
+        </button>
+        <button class="nav-item" data-tab="n5">
+          <span class="nav-icon">📘</span>
+          <span class="nav-label">N5 - Sơ Cấp 1</span>
+          <span class="nav-count" id="count-n5">0/28</span>
+        </button>
+        <button class="nav-item" data-tab="n4">
+          <span class="nav-icon">📙</span>
+          <span class="nav-label">N4 - Sơ Cấp 2</span>
+          <span class="nav-count" id="count-n4">0/26</span>
+        </button>
+        <button class="nav-item" data-tab="n3">
+          <span class="nav-icon">🏆</span>
+          <span class="nav-label">N3 - Trung Cấp</span>
+          <span class="nav-count" id="count-n3">0/15</span>
+        </button>
+        <button class="nav-item" data-tab="flashcards">
+          <span class="nav-icon">🎴</span>
+          <span class="nav-label">Luyện Flashcard</span>
+        </button>
+        <button class="nav-item" data-tab="bo_tro">
+          <span class="nav-icon">📚</span>
+          <span class="nav-label">Sổ Tay Tra Cứu</span>
+          <span class="nav-count" id="count-bo_tro">0/3</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <button class="btn-backup-data" id="btn-open-backup-modal">
+          <span>💾</span>
+          <span>Sao lưu & Khôi phục</span>
+        </button>
+        <button class="theme-toggle-btn" id="theme-toggle">
+          <span id="theme-icon">🌙</span>
+          <span id="theme-text">Giao diện tối</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" id="mobile-menu-btn">☰</button>
+          <div class="page-title-box">
+            <h1 id="current-view-title">Bảng Điều Khiển Học Tập</h1>
+            <p id="current-view-desc">Theo dõi tiến độ, điểm danh và rèn luyện mỗi ngày.</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="btn-pwa-install" id="btn-pwa-install" style="display: none;">
+            📲 Cài Đặt App
+          </button>
+          <div class="audio-toggle-chip" id="tts-status">
+            🔊 Loa: <strong style="color: var(--color-primary);">ja-JP</strong>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW 1: DASHBOARD -->
+      <section class="view-panel active" id="view-dashboard">
+        
+        <!-- Welcome Hero -->
+        <div class="hero-banner">
+          <div class="hero-content">
+            <span class="hero-badge">🇯🇵 Danh ngôn truyền cảm hứng</span>
+            <h2 class="hero-quote">「継続は力なり」 (Keizoku wa chikara nari)</h2>
+            <p class="hero-trans">"Kiên trì chính là sức mạnh. 15 phút mỗi ngày làm nên sự khác biệt vượt bậc."</p>
+            <div class="hero-actions">
+              <button class="btn-primary" id="btn-continue-learning">
+                ▶ Tiếp tục bài học gần nhất
+              </button>
+              <button class="btn-secondary" id="btn-quick-flashcard">
+                🎴 Ôn 10 thẻ Flashcard
+              </button>
+            </div>
+          </div>
+          <div class="hero-decoration">🌸⛩️🗻</div>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrapper fire">🔥</div>
+            <div class="stat-info">
+              <span class="stat-label">Chuỗi ngày học liên tục</span>
+              <h3 class="stat-value" id="dash-streak">0 Ngày</h3>
+              <span class="stat-sub" id="dash-streak-sub">Chưa điểm danh hôm nay</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper check">✅</div>
+            <div class="stat-info">
+              <span class="stat-label">Bài học đã hoàn thành</span>
+              <h3 class="stat-value" id="dash-completed">0 / 76</h3>
+              <span class="stat-sub" id="dash-completed-sub">0% lộ trình</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper calendar">📅</div>
+            <div class="stat-info">
+              <span class="stat-label">Tổng số ngày điểm danh</span>
+              <h3 class="stat-value" id="dash-total-days">0 Ngày</h3>
+              <span class="stat-sub">Kỷ luật học tập</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper cards">🎴</div>
+            <div class="stat-info">
+              <span class="stat-label">Thẻ Flashcard đã nhớ</span>
+              <h3 class="stat-value" id="dash-mastered-cards">0 / 30</h3>
+              <span class="stat-sub">Phản xạ từ vựng & ngữ pháp</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Level Progress Bars -->
+        <div class="progress-section">
+          <h3>Tiến Độ Theo Cấp Độ</h3>
+          <div class="level-progress-grid">
+            
+            <div class="level-progress-card" data-cat="nhap_mon">
+              <div class="lp-header">
+                <span>🔰 Nhập Môn & Bảng Chữ Cái</span>
+                <strong id="lp-nhap_mon-pct">0%</strong>
+              </div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="lp-nhap_mon-bar"></div></div>
+            </div>
+
+            <div class="level-progress-card" data-cat="n5">
+              <div class="lp-header">
+                <span>📘 JLPT N5 - Sơ Cấp 1 (25 Bài)</span>
+                <strong id="lp-n5-pct">0%</strong>
+              </div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="lp-n5-bar"></div></div>
+            </div>
+
+            <div class="level-progress-card" data-cat="n4">
+              <div class="lp-header">
+                <span>📙 JLPT N4 - Sơ Cấp 2 (25 Bài)</span>
+                <strong id="lp-n4-pct">0%</strong>
+              </div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="lp-n4-bar"></div></div>
+            </div>
+
+            <div class="level-progress-card" data-cat="n3">
+              <div class="lp-header">
+                <span>🏆 JLPT N3 - Trung Cấp</span>
+                <strong id="lp-n3-pct">0%</strong>
+              </div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill" id="lp-n3-bar"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Attendance Calendar Heatmap -->
+        <div class="attendance-heatmap-card">
+          <div class="heatmap-header">
+            <div>
+              <h3>Lịch Điểm Danh Tháng Này</h3>
+              <p>Mỗi ô màu xanh đại diện cho một ngày bạn đã giữ vững kỷ luật học tập.</p>
+            </div>
+            <button class="btn-checkin-large" id="btn-dash-checkin">
+              ✨ Điểm Danh Ngay
+            </button>
+          </div>
+          <div class="calendar-grid" id="calendar-days-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- VIEW 2: LESSON LIST / CATEGORY VIEW -->
+      <section class="view-panel" id="view-lessons">
+        <div class="lessons-header-bar">
+          <div class="filter-search-box">
+            <input type="text" id="lesson-search-input" placeholder="🔍 Tìm kiếm bài học, ngữ pháp, kanji...">
+          </div>
+        </div>
+        <div class="lesson-cards-grid" id="lesson-cards-container">
+          <!-- Cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- VIEW 3: LESSON READER -->
+      <section class="view-panel" id="view-reader">
+        <div class="reader-toolbar">
+          <button class="btn-back" id="btn-reader-back">← Quay lại danh sách</button>
+          <div class="reader-actions">
+            <button class="btn-complete-lesson" id="btn-toggle-complete">
+              <span id="complete-icon">⭕</span>
+              <span id="complete-text">Đánh dấu đã học</span>
+            </button>
+          </div>
+        </div>
+        
+        <article class="lesson-article-container" id="reader-content-box">
+          <!-- Markdown parsed HTML rendered here -->
+        </article>
+      </section>
+
+      <!-- VIEW 4: FLASHCARDS -->
+      <section class="view-panel" id="view-flashcards">
+        <div class="flashcard-deck-container">
+          <div class="fc-filter-bar">
+            <span>Chọn cấp độ:</span>
+            <div class="fc-filters" id="fc-filter-buttons">
+              <button class="fc-chip active" data-tag="ALL">Tất cả (30)</button>
+              <button class="fc-chip" data-tag="N5">N5</button>
+              <button class="fc-chip" data-tag="N4">N4</button>
+              <button class="fc-chip" data-tag="N3">N3</button>
+            </div>
+          </div>
+
+          <!-- The 3D Flip Card -->
+          <div class="fc-wrapper">
+            <div class="fc-card" id="active-flashcard">
+              <div class="fc-face fc-front">
+                <span class="fc-tag" id="fc-tag-display">N5</span>
+                <h2 class="fc-main-text" id="fc-front-text">私 (わたし)</h2>
+                <p class="fc-hint">💡 Nhấn để lật xem nghĩa</p>
+                <button class="fc-sound-btn" id="fc-sound-btn" title="Nghe phát âm">🔊</button>
+              </div>
+              <div class="fc-face fc-back">
+                <span class="fc-tag">Ý NGHĨA & VÍ DỤ</span>
+                <h3 class="fc-back-meaning" id="fc-back-meaning">Tôi (Tư)</h3>
+                <div class="fc-example-box">
+                  <p class="fc-example-jp" id="fc-example-jp">わたしは タン です。</p>
+                  <p class="fc-example-vi" id="fc-example-vi">Tôi là Thắng.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="fc-controls">
+            <button class="fc-nav-btn" id="fc-btn-prev">⬅ Trước</button>
+            <div class="fc-action-btns">
+              <button class="btn-fc-action red" id="fc-btn-unmastered">❌ Chưa nhớ</button>
+              <button class="btn-fc-action green" id="fc-btn-mastered">✅ Đã thuộc</button>
+            </div>
+            <button class="fc-nav-btn" id="fc-btn-next">Sau ➡</button>
+          </div>
+
+          <div class="fc-counter-bar">
+            Thẻ: <strong id="fc-current-index">1</strong> / <strong id="fc-total-count">30</strong>
+            &nbsp;|&nbsp; Đã thuộc: <strong id="fc-mastered-count" style="color: var(--color-success);">0</strong>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal: Sao lưu & Khôi phục dữ liệu -->
+  <div class="modal-overlay" id="backup-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>💾 Sao Lưu & Khôi Phục Dữ Liệu</h3>
+        <button class="btn-modal-close" id="btn-close-backup-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>Lịch sử điểm danh, chuỗi streak và tiến độ học tập được lưu cục bộ trên trình duyệt của bạn. Hãy xuất file sao lưu định kỳ để không bị mất khi chuyển thiết bị.</p>
+        
+        <div class="modal-action-box">
+          <h4>1. Xuất file sao lưu (Export Backup)</h4>
+          <p class="sub-text">Tải về máy file dữ liệu `.json` chứa toàn bộ tiến độ của bạn.</p>
+          <button class="btn-primary" id="btn-export-json">📥 Tải File Sao Lưu (.json)</button>
+        </div>
+
+        <div class="modal-action-box">
+          <h4>2. Khôi phục từ file sao lưu (Import Backup)</h4>
+          <p class="sub-text">Tải lên file `.json` đã sao lưu trước đó để đồng bộ lại tiến độ.</p>
+          <input type="file" id="import-json-file" accept=".json" style="display: none;">
+          <button class="btn-secondary" id="btn-trigger-import" style="color: var(--color-text);">📤 Chọn File Khôi Phục</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

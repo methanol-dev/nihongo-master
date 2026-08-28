@@ -1,0 +1,21 @@
+{
+  "name": "nihongo-master",
+  "version": "1.0.0",
+  "description": "Lộ trình và giáo trình tự học tiếng Nhật từ 0 đến N3 kèm Web App điểm danh và flashcard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "japanese",
+    "nihongo",
+    "jlpt-n3",
+    "jlpt-n4",
+    "jlpt-n5",
+    "flashcards",
+    "pwa"
+  ],
+  "author": "meth",
+  "license": "MIT"
+}

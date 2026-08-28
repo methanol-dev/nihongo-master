@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  nihongo-web:
+    build: .
+    container_name: nihongo-master-app
+    restart: always
+    ports:
+      - "3300:80"
