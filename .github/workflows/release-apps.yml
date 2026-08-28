@@ -1,0 +1,93 @@
+name: 🚀 Build & Release Cross-Platform Apps
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-desktop:
+    name: 🖥️ Build Desktop (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🏗️ Build Desktop App
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ matrix.os }}" = "windows-latest" ]; then
+            npm run app:build:win
+          elif [ "${{ matrix.os }}" = "macos-latest" ]; then
+            npm run app:build:mac
+          else
+            npm run app:build:linux
+          fi
+        shell: bash
+
+      - name: 📤 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-artifacts-${{ matrix.os }}
+          path: release/*.*
+          if-no-files-found: warn
+
+  publish-release:
+    name: 🏷️ Publish GitHub Release
+    needs: [build-desktop]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📥 Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-artifacts
+
+      - name: 🗂️ Move release files
+        run: |
+          mkdir -p release-final
+          find all-artifacts -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.deb" -o -name "*.zip" \) -exec cp {} release-final/ \;
+          ls -la release-final/
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-final/*
+          name: 🌸 Nihongo Master Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          body: |
+            ## 🌸 Nihongo Master - Phiên bản ${{ github.ref_name }}
+            
+            Ứng dụng tự học tiếng Nhật từ 0 đến N3 tích hợp điểm danh và flashcard phản xạ.
+
+            ### 📦 Các bản cài đặt (Download Binaries):
+            - 🪟 **Windows**: Tải file `.exe` (Setup Installer hoặc Portable)
+            - 🍎 **macOS**: Tải file `.dmg`
+            - 🐧 **Linux**: Tải file `.AppImage` hoặc `.deb`
+
+            ---
+            *Tự động đóng gói và xuất xưởng bởi GitHub Actions CI/CD.*

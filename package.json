@@ -2,10 +2,18 @@
   "name": "nihongo-master",
   "version": "1.0.0",
   "description": "Lộ trình và giáo trình tự học tiếng Nhật từ 0 đến N3 kèm Web App điểm danh và flashcard",
-  "main": "server.js",
+  "main": "electron/main.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "app:dev": "electron .",
+    "app:build:win": "electron-builder --win",
+    "app:build:mac": "electron-builder --mac",
+    "app:build:linux": "electron-builder --linux",
+    "app:build:all": "electron-builder -wml",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npx cap sync",
+    "cap:open:android": "npx cap open android"
   },
   "keywords": [
     "japanese",
@@ -14,8 +22,70 @@
     "jlpt-n4",
     "jlpt-n5",
     "flashcards",
-    "pwa"
+    "pwa",
+    "electron",
+    "desktop-app",
+    "android",
+    "ios"
   ],
   "author": "meth",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.nihongomaster.desktop",
+    "productName": "Nihongo Master",
+    "copyright": "Copyright © 2026 meth",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "web/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "web/favicon.svg"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Nihongo Master"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.education",
+      "icon": "web/favicon.svg"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Education",
+      "icon": "web/favicon.svg"
+    }
+  }
 }
