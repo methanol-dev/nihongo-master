@@ -62,7 +62,7 @@
           ]
         }
       ],
-      "icon": "web/favicon.svg"
+      "icon": "web/icon.png"
     },
     "nsis": {
       "oneClick": false,
@@ -77,7 +77,7 @@
         "zip"
       ],
       "category": "public.app-category.education",
-      "icon": "web/favicon.svg"
+      "icon": "web/icon.png"
     },
     "linux": {
       "target": [
@@ -85,7 +85,7 @@
         "deb"
       ],
       "category": "Education",
-      "icon": "web/favicon.svg"
+      "icon": "web/icon.png"
     }
   }
 }
