@@ -13,7 +13,8 @@
     "app:build:all": "electron-builder -wml",
     "cap:add:android": "npx cap add android",
     "cap:sync": "npx cap sync",
-    "cap:open:android": "npx cap open android"
+    "cap:open:android": "npx cap open android",
+    "wiki:push": "node push_wiki.js"
   },
   "keywords": [
     "japanese",
