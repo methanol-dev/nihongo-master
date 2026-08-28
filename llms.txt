@@ -1,0 +1,22 @@
+# Nihongo Master - AI / LLM Context Documentation
+
+> A complete Japanese language learning platform from Zero to JLPT N3 with a PWA web application.
+
+## Core Documentation
+- [Overview & Roadmap](GIAO_TRINH_TIENG_NHAT_N5_TO_N3.md): Comprehensive 4-stage study roadmap.
+- [Cloudflare Tunnel Guide](HUONG_DAN_CLOUDFLARED.md): Step-by-step self-hosting and tunnel deployment instructions.
+- [Changelog](CHANGELOG.md): Version history and feature breakdown.
+- [Contributing](CONTRIBUTING.md): Guidelines for adding new lessons and materials.
+
+## Study Curriculum Structure
+- `00-nhap-mon/`: Hiragana, Katakana, Pronunciation & Greetings (4 lessons).
+- `01-n5-so-cap-1/`: Minna no Nihongo I Lessons 1-25 + N5 Kanji + Grammar Cheatsheet (28 files).
+- `02-n4-so-cap-2/`: Minna no Nihongo II Lessons 26-50 + Keigo Master (26 files).
+- `03-n3-trung-cap/`: Shinkanzen Master N3 Grammar Chapters 1-12, Mimikara Vocab, Dokkai, Choukai (15 files).
+- `04-luyen-de-n3/`: Full Mock Exam with detailed answer key.
+- `tai-lieu-bo-tro/`: 214 Kanji Radicals & Complete Japanese Particle Guide.
+
+## Web Application Stack
+- **Architecture**: Static Web App with PWA offline caching (`manifest.json`, `sw.js`).
+- **Server**: Zero-dependency Node.js HTTP Server (`server.js`) listening on port `3300`.
+- **Docker**: Nginx Alpine container via `Dockerfile` and `docker-compose.yml`.
